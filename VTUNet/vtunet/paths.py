@@ -14,6 +14,8 @@
 
 import os
 from batchgenerators.utilities.file_and_folder_operations import maybe_mkdir_p, join
+from thesmuggler import smuggle
+yusongli = smuggle('../yusongli.py')
 
 # do not modify these unless you know what you are doing
 my_output_identifier = "vtunet"
@@ -26,13 +28,19 @@ default_cascade_trainer = "vtunetTrainerV2CascadeFullRes"
 PLEASE READ paths.md FOR INFORMATION TO HOW TO SET THIS UP
 """
 
-base = os.environ['vtunet_raw_data_base'] if "vtunet_raw_data_base" in os.environ.keys() else None
-preprocessing_output_dir = os.environ['vtunet_preprocessed'] if "vtunet_preprocessed" in os.environ.keys() else None
-network_training_output_dir_base = os.path.join(os.environ['RESULTS_FOLDER_VTUNET']) if "RESULTS_FOLDER_VTUNET" in os.environ.keys() else None
+# base = os.environ['vtunet_raw_data_base'] if "vtunet_raw_data_base" in os.environ.keys() else None
+# preprocessing_output_dir = os.environ['vtunet_preprocessed'] if "vtunet_preprocessed" in os.environ.keys() else None
+# network_training_output_dir_base = os.path.join(os.environ['RESULTS_FOLDER_VTUNET']) if "RESULTS_FOLDER_VTUNET" in os.environ.keys() else None
+
+base = yusongli.BASE
+preprocessing_output_dir = yusongli.PREPROCESSING_OUTPUT_DIR
+network_training_output_dir_base = yusongli.NETWORK_TRAINING_OUTPUT_DIR_BASE
 
 if base is not None:
-    vtunet_raw_data = join(base, "vtunet_raw_data")
-    vtunet_cropped_data = join(base, "vtunet_cropped_data")
+    # vtunet_raw_data = join(base, "vtunet_raw_data")
+    # vtunet_cropped_data = join(base, "vtunet_cropped_data")
+    vtunet_raw_data = yusongli.VTUNET_RAW_DATA
+    vtunet_cropped_data = yusongli.VTUNET_CROPPED_DATA
     maybe_mkdir_p(vtunet_raw_data)
     maybe_mkdir_p(vtunet_cropped_data)
 else:
